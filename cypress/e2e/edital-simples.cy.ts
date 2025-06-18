@@ -5,9 +5,9 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     // Gancho em nível raíz
     // executa antes de realizar cada teste(it)
     cy.typelogin(
-      '[URL do sistema]',// [URL do sistema]
-      '[E-mail do usuário]', // [E-mail do usuário]
-      '[Senha do usuário]', // [Senha do usuário]
+      'https://novo-sig.ledes.net/',// [URL do sistema]
+      'grupo3_gestor@sig.com', // [E-mail do usuário]
+      'Grupo3@sig', // [Senha do usuário]
     ); //Acessa a página de login usando as credenciais do usuário e senha.
   });
   it.only('Realiza login no sistema e cria um edital simples', () => { //Teste edital simples, se houver mais de um teste, o it.only executa apenas esse teste.
