@@ -22,11 +22,11 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       // Atividade 3 - Faça a continuidade do teste, preenchendo os campos obrigatórios da proposta.
   
       cy.get('[data-cy="instituicaoExecutoraId"]').click();
-      cy.get('[data-cy-index="instituicaoExecutoraId-item-1"]').click(); //Seleciona a primeira Instituição Executora da lista de Instituições
+      cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click(); // Seleciona a primeira opção
   
   
       cy.get('[data-cy="unidadeExecutoraId"]').click();
-      cy.get('[data-cy-index="unidadeExecutoraId-item-0"]').click(); //Seleciona a primeira Unidade Executora da lista de Unidades
+      cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click(); // Seleciona a primeira opção
   
       // cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
   
