@@ -12,7 +12,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       cy.get('[data-cy="breadcrumb-home"]').click(); //Clica no botão "Home" para retornar à página anterior
       cy.get('[data-cy="editais-ver-mais"]').click(); //Clica no botão "Ver Mais" para acessar a página de Editais
   
-      cy.get('[data-cy-index="visualizar-edital-10"]').click(); //Edite essa linha para selecionar o Edital respectivo
+      cy.get('[data-cy-index="visualizar-edital-1"]').click(); //Edite essa linha para selecionar o Edital respectivo
       cy.wait(300); //Aguarda 300ms para garantir que a página foi carregada completamente
       cy.get('[data-cy="criar-proposta"]').click(); //Clica no botão "Criar Proposta" para iniciar o processo de criação de uma nova proposta
       cy.get('[data-cy="tituloDoProjeto"]').clear().type(
@@ -21,12 +21,14 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       )
       // Atividade 3 - Faça a continuidade do teste, preenchendo os campos obrigatórios da proposta.
   
+      /*
       cy.get('[data-cy="instituicaoExecutoraId"]').click();
       cy.get('[data-cy-index="instituicaoExecutoraId-item-1"]').click(); //Seleciona a primeira Instituição Executora da lista de Instituições
   
   
       cy.get('[data-cy="unidadeExecutoraId"]').click();
       cy.get('[data-cy-index="unidadeExecutoraId-item-0"]').click(); //Seleciona a primeira Unidade Executora da lista de Unidades
+      */
   
       // cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
   
@@ -41,8 +43,8 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       cy.get('[data-cy="areaDeConhecimento.0.subAreaId"]').click();
       cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); // Seleciona a primeira opção
   
-      cy.get('[data-cy="areaDeConhecimento.0.subAreaId"]').click();
-      cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); // Seleciona a primeira opção
+      /*cy.get('[data-cy="areaDeConhecimento.0.subAreaId"]').click();
+      cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); // Seleciona a primeira opção*/
   
   
       cy.get('[data-cy="areaDeConhecimento.0.especialidadeId"]').click()
@@ -109,7 +111,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       cy.wait(500);
   
       cy.get('[data-cy="criadoPor.instituicaoId"]').click(); //Clica no campo de seleção de Instituição
-      cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona a primeira Instituição da lista de Instituições
+      cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click(); //Seleciona a primeira Instituição da lista de Instituições
   
   
   
@@ -171,6 +173,12 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
       cy.wait(500);
   
+      // INDICADORES DE PRODUÇÃO DO EDITAL MÉDIO ENTRA AQUI
+      Cypress._.times(35, (index) => {
+        cy.get('input[type="number"]').eq(index).type('10', { delay: 0 }); //Preenche os campos de Indicadores de Produção com o valor "10"
+      });
+
+
       // cy.get('[data-cy="nome-do-pesquisa"]').click(); //Clica na aba Nome do Pesquisador para acessar a seção de Nome do Pesquisador
       // cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona o primeiro Mês de Início da lista de Meses
       // cy.get('.MuiButton-root > .MuiStack-root').click(); //Clica no botão "Adicionar" para adicionar um novo Nome do Pesquisador
@@ -179,7 +187,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
   
   
       cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
-      cy.wait(500);
+      cy.wait(2000);
   
       cy.get('[data-cy="propostaAtividade-adicionar"]').click(); //Clica no botão "Adicionar" para adicionar uma nova Atividade
   
@@ -202,10 +210,11 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       cy.wait(500);
   
       cy.get('[data-cy="termoDeAceiteAceito"]').check(); //Clica no campo de seleção de Termo de Aceite Aceito
-  
-  
+      cy.get('[data-cy="edital.termoDeAceite"]').clear().type('Termo de Aceite de Teste', { delay: 0 }); //Preenche o campo de Termo de Aceite com o valor "Termo de Aceite de Teste"
+      cy.get('[data-cy="termoDeAceiteAceito"]').check(); //Clica no campo de seleção de Termo de Aceite Aceito
+
       cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações da proposta
       cy.get('[data-cy="menu-finalizar"]').click(); //Clica no botão "Finalizar" para salvar e sair da área de adição da propostas
-  
+      
     }); 
   });

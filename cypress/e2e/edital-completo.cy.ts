@@ -17,7 +17,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('[data-cy="nav-item-publicar-edital"]').click(); //Clica na opção Editais para acessar da página de Editais
     cy.get('[data-cy="add-publicar-edital"]').click(); //Clica no botão "Adicionar" para criação de um novo Edital
 
-    cy.get('[data-cy="nome"]').type("Grupo-03 E.M. 010/2025 Alexandre-Torres", {
+    cy.get('[data-cy="nome"]').type("Grupo-03 Edital Completo 010/2025 Alexandre-Torres", {
       delay: 0,
     }); //Preenche o campo "Nome" do Edital
     cy.get('[data-cy="restricoes"]').click();
