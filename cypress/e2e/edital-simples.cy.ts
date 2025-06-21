@@ -15,7 +15,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="nav-item-publicar-edital"]').click(); //Clica na opção Editais para acessar da página de Editais
     cy.get('[data-cy="add-publicar-edital"]').click(); //Clica no botão "Adicionar" para criação de um novo Edital
     cy.get('[data-cy="nome"]').type(
-      'Grupo-01 E.S. 005/2025 joão-neves', //Edite essa linha para preencher o nome do Edital
+      'Grupo-03 E.S. 006/2025 eduardo-alves', //Edite essa linha para preencher o nome do Edital
       { delay: 0 },
     ); //Preenche o campo "Nome" do Edital
     cy.get('[data-cy="restricoes"]').click(); //Clica na aba Restrições para seguir para a página de Restrições
