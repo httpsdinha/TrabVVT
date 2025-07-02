@@ -17,7 +17,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('[data-cy="nav-item-publicar-edital"]').click(); //Clica na opção Editais para acessar da página de Editais
     cy.get('[data-cy="add-publicar-edital"]').click(); //Clica no botão "Adicionar" para criação de um novo Edital
 
-    cy.get('[data-cy="nome"]').type("Grupo-03 E.M. 010/2025 eduardo-alves", {
+    cy.get('[data-cy="nome"]').type("Grupo-03 E.M. 007/2025 eduardo-alves", {
       delay: 0,
     }); //Preenche o campo "Nome" do Edital
     cy.get('[data-cy="restricoes"]').click();
@@ -100,7 +100,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar" para criar um novo Período de Submissão
     cy.get('[data-cy="chamadaUnsaved.inicio"]').type(getCurrentDateTime()); //Preenche o campo "Início" do Período de Submissão com a data do dia de hoje
     cy.get('[data-cy="chamadaUnsaved.termino"]').type(
-      getCurrentDateTime({ addYears: 1 })
+      getCurrentDateTime({ addDays: 5 })
     ); //Preenche o campo "Término" do Período de Submissão com a data do dia de hoje + 1 ano
     cy.get('[data-cy="chamada-confirmar"]').click(); //Clica no botão "Salvar" para salvar as informações do Período de Submissão
 
@@ -111,13 +111,17 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
 
     cy.get('[data-cy="perguntas"]').click(); //Clica na aba Perguntas para seguir para a página de Perguntas
     cy.get('[data-cy="indicadores-de-producao"]').click(); //Clica na aba Indicadores de Produção para seguir para a página de Indicadores de Produção
-    cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar" para criar um novo Indicador de Produção
-    cy.get('[data-cy="indicadorProducaoUnsaved.id"]').click();
-    cy.get('.MuiAutocomplete-popper [role="option"]').first().click();
-    cy.get('[data-cy="indicadorProducao-confirmar"').click();
+    Cypress._.times(3, () => {
+      cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar" para criar um novo Indicador de Produção
+      cy.get('[data-cy="indicadorProducaoUnsaved.id"]').click();
+      cy.get('.MuiAutocomplete-popper [role="option"]:not(:empty)')
+        .first()
+        .click();
+      cy.get('[data-cy="indicadorProducao-confirmar"]').click(); //Clica no botão "Salvar" para salvar as informações do Indicador de Produção
+    });
 
     cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações do Edital
-    //   cy.get('[data-cy="menu-finalizar"]').click(); //Clica no botão "Finalizar" para salvar e sair da área de adição do Edital
+    cy.get('[data-cy="menu-finalizar"]').click(); //Clica no botão "Finalizar" para salvar e sair da área de adição do Edital
 
     //Resultado esperado: O Edital deve ser salvo com sucesso e o usuário deve ser redirecionado para a página de Editais.
   });

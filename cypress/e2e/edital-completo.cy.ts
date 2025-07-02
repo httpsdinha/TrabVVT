@@ -17,7 +17,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('[data-cy="nav-item-publicar-edital"]').click(); //Clica na opção Editais para acessar da página de Editais
     cy.get('[data-cy="add-publicar-edital"]').click(); //Clica no botão "Adicionar" para criação de um novo Edital
 
-    cy.get('[data-cy="nome"]').type("Grupo-03 Edital Completo 010/2025 Alexandre-Torres", {
+    cy.get('[data-cy="nome"]').type("Grupo-03 E.C. 007/2025 Alexandre-Torres", {
       delay: 0,
     }); //Preenche o campo "Nome" do Edital
     cy.get('[data-cy="restricoes"]').click();
@@ -28,14 +28,10 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     // COMECANDO A PERSONALIZACAO DO EDITAL COMPLETO
     cy.get('[data-cy="termo-de-aceite').click();
 
-    // Primeiro, clique no elemento que age como "gatilho" para o CKEditor.
-    // (Assumindo que este é o elemento que possui data-cy="termoDeAceite"
-    // e que, ao ser clicado, remove-se e injeta o CKEditor real sem esse data-cy).
     cy.get('[data-cy="termoDeAceite"]')
       .should("be.visible") // Garante que o gatilho está visível
       .click(); // Clica no gatilho para carregar o CKEditor
 
-    // --- Agora, interaja com a instância REAL do CKEditor ---
     const ckEditorRealSelector =
       'div[contenteditable="true"].ck-editor__editable.ck-content';
 
@@ -92,6 +88,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
 
     cy.get('[data-cy="abrangencia"]').click();
     cy.get('[data-cy="estado-todos"]').click();
+    cy.get('[data-cy="menu-salvar"]').click();
 
     cy.get('[data-cy="informacoes-complementares"]').click();
 
@@ -117,7 +114,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar" para criar um novo Período de Submissão
     cy.get('[data-cy="chamadaUnsaved.inicio"]').type(getCurrentDateTime()); //Preenche o campo "Início" do Período de Submissão com a data do dia de hoje
     cy.get('[data-cy="chamadaUnsaved.termino"]').type(
-      getCurrentDateTime({ addYears: 1 })
+      getCurrentDateTime({ addDays: 5 })
     ); //Preenche o campo "Término" do Período de Submissão com a data do dia de hoje + 1 ano
     cy.get('[data-cy="chamada-confirmar"]').click(); //Clica no botão "Salvar" para salvar as informações do Período de Submissão
 
@@ -138,12 +135,16 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações do Edital
 
     cy.get('[data-cy="rubricas"]').click();
-    cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar" para criar uma nova Rubrica
-    cy.get('[data-cy="editalRubricaUnsaved.tipoEditalRubrica"]').click();
-    cy.get('.MuiAutocomplete-popper [role="option"]').first().click();
-    cy.get('[data-cy="editalRubricaUnsaved.naturezaDespesaId"]').click();
-    cy.get('.MuiAutocomplete-popper [role="option"]').first().click();
-    cy.get('[data-cy="editalRubrica-confirmar"]').click();
+
+    Cypress._.times(9, () => {
+      cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar" para criar uma nova Rubrica
+      cy.get('[data-cy="editalRubricaUnsaved.tipoEditalRubrica"]').click();
+      cy.get('.MuiAutocomplete-popper [role="option"]').first().click();
+      cy.get('[data-cy="editalRubricaUnsaved.naturezaDespesaId"]').click();
+      cy.get('.MuiAutocomplete-popper [role="option"]').first().click();
+      cy.get('[data-cy="editalRubrica-confirmar"]').click();
+    });
+
     cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações do Edital
 
     cy.get('[data-cy="faixas-de-financiamento"]').click();
@@ -152,7 +153,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     
     Cypress._.times(5, (index) => {
       cy.get('[data-cy="add-button"]').click();
-      const valorMinimo = valorMaximoAnterior + 1;
+      const valorMinimo = valorMaximoAnterior + 0.1;
       const valorMaximo = valorMinimo + tamanhoDaFaixa;
       cy.get('[data-cy="faixaFinanciamentoUnsaved.nome"]')
         .clear()

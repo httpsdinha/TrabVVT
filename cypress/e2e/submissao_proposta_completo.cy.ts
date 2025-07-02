@@ -4,15 +4,15 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       // executa antes de realizar cada teste(it)
       cy.typelogin(
         'https://novo-sig.ledes.net/',// [URL do sistema]
-        'grupo3_pesq@sig.com',
-        'Grupo3@sig', // [Senha do usuário]
+        'grupo14_pesq@sig.com',
+        'Grupo14@sig', // [Senha do usuário]
       ); //Acessa a página de login usando as credenciais do usuário e senha.
     });
     it('Realiza login no sistema e submete uma proposta', () => {
       cy.get('[data-cy="breadcrumb-home"]').click(); //Clica no botão "Home" para retornar à página anterior
       cy.get('[data-cy="editais-ver-mais"]').click(); //Clica no botão "Ver Mais" para acessar a página de Editais
   
-      cy.get('[data-cy-index="visualizar-edital-0"]').click(); //Edite essa linha para selecionar o Edital respectivo
+      cy.get('[data-cy="visualizar-edital-grupo-03-e-c-007"]').click(); //Edite essa linha para selecionar o Edital respectivo
       cy.wait(300); //Aguarda 300ms para garantir que a página foi carregada completamente
       cy.get('[data-cy="criar-proposta"]').click(); //Clica no botão "Criar Proposta" para iniciar o processo de criação de uma nova proposta
       cy.get('[data-cy="tituloDoProjeto"]').clear().type(
@@ -101,6 +101,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     //   cy.wait(300); //Aguarda 300ms para garantir que o campo de Nome Social esteja pronto para receber o valor
     //   cy.get('[data-cy="criadoPor.nomeSocial"]').clear().type('Teste Nome Social', {delay: 0}); // Limpa e preenche o campo de Nome Social
       
+    /*
       cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
       cy.wait(500);
   
@@ -134,6 +135,8 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
  
       cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
       cy.wait(500);
+      */
+     cy.get('[data-cy="dados-academicos"]').click();
   
 
     //   cy.get('[data-cy="criadoPor.instituicaoId"]').click(); //Clica no campo de seleção de Instituição
