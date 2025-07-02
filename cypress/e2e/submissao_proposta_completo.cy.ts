@@ -26,13 +26,15 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click(); // Seleciona a primeira opção
   
   
-      cy.get('[data-cy="unidadeExecutoraId"]').click();
-      cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click(); // Seleciona a primeira opção
+      // cy.get('[data-cy="unidadeExecutoraId"]').click();
+      // cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click(); // Seleciona a primeira opção
 
-  
+      // descomentar caso seja a primeira vez fazendo uma submissão de proposta
+      // cy.get('[data-cy="areaDeConhecimento-adicionar"]').should('exist').then(() => {
       // cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
+      // });
   
-      cy.get('.MuiAccordionSummary-root').click();
+      cy.get('.MuiAccordionSummary-root').click(); 
   
       cy.get('[data-cy="areaDeConhecimento.0.grandeAreaId"]').click();
       cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); // Seleciona a primeira opção
@@ -76,9 +78,11 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
 
     cy.get('[data-cy="abrangencia.0.estadoId"]').click(); //Clica no campo de seleção de Estado
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona o primeiro Estado da lista de Estados
+    cy.wait(500);
       
     cy.get('[data-cy="abrangencia.0.abrangenciaMunicipio"]').click(); //Clica no campo de seleção de Abrangência Municipal
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(3).click(); //Seleciona o primeiro Município da lista de Municípios
+    cy.wait(500);
   
     cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
     cy.wait(500);
@@ -212,7 +216,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
 
       // INDICADORES DE PRODUÇÃO DO EDITAL MÉDIO ENTRA AQUI
       // Mudar aqui para 35 vezes 
-      Cypress._.times(35, (index) => {
+      Cypress._.times(2, (index) => {
         cy.get('input[type="number"]').eq(index).type('10', { delay: 0 }); //Preenche os campos de Indicadores de Produção com o valor "10"
       });
   
@@ -248,7 +252,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       // Diarias - Faixa de Financiamento
 
       cy.get('[data-cy="faixaFinanciamentoId"]').click(); //Clica no campo de seleção de Faixa de Financiamento
-      cy.get('.MuiAutocomplete-popper [role="option"]').eq(4).click(); //Seleciona a primeira Faixa de Financiamento da lista de Faixas
+      cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona a primeira Faixa de Financiamento da lista de Faixas
       
       cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
         cy.wait(1000); //Aguarda 500ms para garantir que a página foi carregada completamente
@@ -275,7 +279,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
         cy.get('[data-cy="rubricaDiariaUnsaved.municipio"]').click(); //Clica no campo de Quantidade
         cy.contains('.MuiAutocomplete-option', 'Bujari').click();  
 
-        cy.get('[data-cy="rubricaDiariaUnsaved.numeroDiaria"]').click().type("10", {delay: 0}); //Clica no campo de Quantidade
+        cy.get('[data-cy="rubricaDiariaUnsaved.numeroDiaria"]').click().type("15", {delay: 0}); //Clica no campo de Quantidade
 
         cy.get('[data-cy="rubricaDiariaUnsaved.custoUnitario"]').click().type("10000", {delay: 0}); //Clica no campo de Custo Unitário
         // cy.get('[data-cy="rubricaDiariaUnsaved.valorTotal]').click(); //Clica no campo de Quantidade
@@ -283,14 +287,14 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
         cy.get('[data-cy="rubricaDiariaUnsaved.mesPrevisto"]').click(); //Clica no campo de Mês Previsto       
         cy.get('.MuiAutocomplete-popper [role="option"]').eq(3).click();
 
-        cy.get('[data-cy="rubricaDiariaUnsaved.contrapartida"]').click(); //Clica no campo de Contrapartida
+        // cy.get('[data-cy="rubricaDiariaUnsaved.contrapartida"]').click(); //Clica no campo de Contrapartida
 
-        cy.get('[data-cy="rubricaDiariaUnsaved.tipoPessoa"]').click()        
-        cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
+        // cy.get('[data-cy="rubricaDiariaUnsaved.tipoPessoa"]').click()        
+        // cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
 
-        cy.get('[data-cy="rubricaDiariaUnsaved.entidade"]').click().type("Entidade de Teste", {delay: 0}); //Clica no campo de Entidade e preenche com o texto "Entidade de Teste"
+        // cy.get('[data-cy="rubricaDiariaUnsaved.entidade"]').click().type("Entidade de Teste", {delay: 0}); //Clica no campo de Entidade e preenche com o texto "Entidade de Teste"
 
-        cy.get('[data-cy="rubricaDiariaUnsaved.justificativa"]').click().type("Justificativa de Teste", {delay: 0}); //Clica no campo de Justificativa e preenche com o texto "Justificativa de Teste"
+        // cy.get('[data-cy="rubricaDiariaUnsaved.justificativa"]').click().type("Justificativa de Teste", {delay: 0}); //Clica no campo de Justificativa e preenche com o texto "Justificativa de Teste"
         
         cy.get('[data-cy="rubricaDiaria-confirmar"]').click(); //Clica no botão "Confirmar" para confirmar a adição da nova Rubrica de Diária
         cy.wait(1000); //Aguarda 500ms para garantir que a página foi carregada completamente
@@ -304,7 +308,118 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
         cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
         cy.wait(500);*/
 
-        cy.get('[data-cy="bolsa"]').click();
+        cy.get('[data-cy="next-button"]').click();
+
+        cy.get('[data-cy="add-button"]').click();
+        cy.get('[data-cy="rubricaMaterialConsumoUnsaved.especificacao"]').click().type("Especificação de Teste", {delay: 0}); //Clica no campo de Especificação e preenche com o texto "Especificação de Teste" 
+        cy.get('[data-cy="rubricaMaterialConsumoUnsaved.unidadeMedida"]').click();
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click();
+        cy.get('[data-cy="rubricaMaterialConsumoUnsaved.quantidade"]').click().type("10", {delay: 0}); //Clica no campo de Quantidade e preenche com o valor "10"
+        cy.get('[data-cy="rubricaMaterialConsumoUnsaved.custoUnitario"]').click().type("1000", {delay: 0}); //Clica no campo de Custo Unitário e preenche com o valor "1000"
+        cy.get('[data-cy="rubricaMaterialConsumoUnsaved.mesPrevisto"]').click(); //Clica no campo de Mês Previsto
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(3).click(); //Seleciona o terceiro Mês Previsto da lista de Meses Previsto
+        cy.get('[data-cy="rubricaMaterialConsumo-confirmar"]').click(); //Clica no botão "Confirmar" para confirmar a adição da nova Rubrica de Material de Consumo
+        
+        cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações da proposta
+        cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
+        cy.wait(500); //Aguarda 500ms para garantir que a página foi carregada completamente
+
+        cy.get('[data-cy="add-button"]').click();
+        cy.get('[data-cy="rubricaMaterialPermanenteUnsaved.especificacao"]').click().type("Especificação de Teste", {delay: 0}); //Clica no campo de Especificação e preenche com o texto "Especificação de Teste" 
+        cy.get('[data-cy="rubricaMaterialPermanenteUnsaved.tipoOrigem"]').click();
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click();
+        cy.get('[data-cy="rubricaMaterialPermanenteUnsaved.quantidade"]').click().type("10", {delay: 0}); //Clica no campo de Quantidade e preenche com o valor "10"
+        cy.get('[data-cy="rubricaMaterialPermanenteUnsaved.custoUnitario"]').click().type("1000", {delay: 0}); //Clica no campo de Custo Unitário e preenche com o valor "1000"
+        cy.get('[data-cy="rubricaMaterialPermanenteUnsaved.mesPrevisto"]').click(); //Clica no campo de Mês Previsto
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(3).click(); //Seleciona o terceiro Mês Previsto da lista de Meses Previsto
+        cy.get('[data-cy="rubricaMaterialPermanente-confirmar"]').click(); //Clica no botão "Confirmar" para confirmar a adição da nova Rubrica de Material Permanente
+
+        cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações da proposta
+        cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
+        cy.wait(500); //Aguarda 500ms para garantir que a página foi carregada completamente
+
+        cy.get('[data-cy="add-button"]').click();
+        cy.get('[data-cy="rubricaPassagemUnsaved.trecho"]').click();
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click();
+        cy.wait(500);
+        cy.get('[data-cy="rubricaPassagemUnsaved.paisOrigemId"]').click();
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
+        cy.get('[data-cy="rubricaPassagemUnsaved.estadoRegiaoOrigem"]').click().type("Centro-Oeste", {delay: 0});
+        cy.get('[data-cy="rubricaPassagemUnsaved.paisDestinoId"]').click();
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click();
+        cy.get('[data-cy="rubricaPassagemUnsaved.estadoRegiaoDestino"]').click().type("Norte", {delay: 0});
+        cy.get('[data-cy="rubricaPassagemUnsaved.tipo"]').click();
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click();
+        cy.get('[data-cy="rubricaPassagemUnsaved.quantidade"]').click().type("10", {delay: 0}); //Clica no campo de Quantidade e preenche com o valor "10"
+        cy.get('[data-cy="rubricaPassagemUnsaved.custoUnitario"]').click().type("1000", {delay: 0}); //Clica no campo de Custo Unitário e preenche com o valor "1000"
+        cy.get('[data-cy="rubricaPassagemUnsaved.mesPrevisto"]').click(); //Clica no campo de Mês Previsto
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(3).click(); //Seleciona o terceiro Mês Previsto da lista de Meses Previsto
+        cy.get('[data-cy="rubricaPassagem-confirmar"]').click(); //Clica no botão "Confirmar" para confirmar a adição da nova Rubrica de Material de Consumo
+
+        cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações da proposta
+        cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
+        cy.wait(500); //Aguarda 500ms para garantir que a página foi carregada completamente
+
+        cy.get('[data-cy="add-button"]').click();
+        //cy.get('[data-cy="rubricaHospedagemAlimentacaoUnsaved.paisId"]').click();
+        //cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
+        cy.get('[data-cy="rubricaHospedagemAlimentacaoUnsaved.estadoId"]').click();
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
+        cy.get('[data-cy="rubricaHospedagemAlimentacaoUnsaved.municipio"]').click();
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
+        cy.get('[data-cy="rubricaHospedagemAlimentacaoUnsaved.especificacao"]').click().type("Especificação de Teste", {delay: 0});
+        cy.get('[data-cy="rubricaHospedagemAlimentacaoUnsaved.quantidade"]').click().type("10", {delay: 0}); //Clica no campo de Quantidade e preenche com o valor "10"
+        cy.get('[data-cy="rubricaHospedagemAlimentacaoUnsaved.custoUnitario"]').click().type("1000", {delay: 0}); //Clica no campo de Custo Unitário e preenche com o valor "1000"
+        cy.get('[data-cy="rubricaHospedagemAlimentacaoUnsaved.mesPrevisto"]').click(); //Clica no campo de Mês Previsto
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(3).click(); //Seleciona o terceiro Mês Previsto da lista de Meses Previsto
+        cy.get('[data-cy="rubricaHospedagemAlimentacao-confirmar"]').click(); //Clica no botão "Confirmar" para confirmar a adição da nova Rubrica de Material de Consumo
+
+        cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações da proposta
+        cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
+        cy.wait(500); //Aguarda 500ms para garantir que a página foi carregada completamente
+
+        cy.get('[data-cy="add-button"]').click();
+        cy.get('[data-cy="rubricaServicoTerceiroUnsaved.especificacao"]').click().type("Especificação de Teste", {delay: 0});
+        cy.get('[data-cy="rubricaServicoTerceiroUnsaved.tipo"]').click();
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
+        cy.get('[data-cy="rubricaServicoTerceiroUnsaved.mesPrevisto"]').click();
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
+        cy.get('[data-cy="rubricaServicoTerceiroUnsaved.valorTotal"]').click().type("1000", {delay: 0}); //Clica no campo de Custo Unitário e preenche com o valor "1000"
+        cy.get('[data-cy="rubricaServicoTerceiro-confirmar"]').click();
+
+        cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações da proposta
+        cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
+        cy.wait(500); //Aguarda 500ms para garantir que a página foi carregada completamente
+
+        cy.get('[data-cy="add-button"]').click();
+        cy.get('[data-cy="rubricaPessoalUnsaved.funcao"]').click().type("Função Exemplo", {delay: 0});
+        cy.get('[data-cy="rubricaPessoalUnsaved.formacaoProfissional"]').click().type("Formação Exemplo", {delay: 0});
+        cy.get('[data-cy="rubricaPessoalUnsaved.perfilDesejado"]').click().type("Perfil Desejado Exemplo", {delay: 0});
+        cy.get('[data-cy="rubricaPessoalUnsaved.mesInicio"]').click();
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
+        cy.get('[data-cy="rubricaPessoalUnsaved.duracao"]').click();
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
+        cy.get('[data-cy="rubricaPessoalUnsaved.cargaHorariaSemanal"]').click();
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
+        cy.get('[data-cy="rubricaPessoalUnsaved.custoHoraCustoMes"]').click().type("1000", {delay: 0});
+        cy.get('[data-cy="rubricaPessoalUnsaved.valorTotal"]').click().type("1000", {delay: 0});
+        cy.get('[data-cy="rubricaPessoal-confirmar"]').click();
+
+        cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações da proposta
+        cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
+        cy.wait(500); //Aguarda 500ms para garantir que a página foi carregada completamente
+        
+        cy.get('[data-cy="add-rubrica-encargo"]').click();
+        cy.get('[data-cy="rubricaEncargoUnsaved.especificacao"]').click().type("Especificação de Teste", {delay: 0});
+        cy.get('[data-cy="rubricaEncargoUnsaved.valorTotal"]').click().type("1000", {delay: 0});
+        cy.get('[data-cy="rubricaEncargoUnsaved.mesPrevisto"]').click();
+        cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
+        cy.get('[data-cy="rubricaEncargo-confirmar"]').click();
+
+        cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações da proposta
+        cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
+        cy.wait(500); //Aguarda 500ms para garantir que a página foi carregada completamente
+
         cy.get('[data-cy="add-bolsas"]').click();
         cy.get('[data-cy="rubricaBolsaUnsaved.modalidadeBolsaId"]').click(); //Clica no campo de seleção de Modalidade
         cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
@@ -317,27 +432,32 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
         cy.get('[data-cy="rubricaBolsaUnsaved.duracao"]').click(); //Clica no campo de Duração em Meses
         cy.get('.MuiAutocomplete-popper [role="option"]').eq(5).click();
 
-        cy.get('[data-cy="rubricaBolsaUnsaved.contrapartida"]').check(); //Clica no campo de Contrapartida para marcar a opção "Sim"
-        cy.get('[data-cy="rubricaBolsaUnsaved.entidade"]').click().type("Entidade de Teste", {delay: 0}); //Clica no campo de Entidade e preenche com o texto "Entidade de Teste"
-        cy.get('[data-cy="rubricaBolsaUnsaved.tipoPessoa"]').click();
-        cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona a primeira opção de Tipo de Pessoa da lista de Tipos de Pessoas
+        // cy.get('[data-cy="rubricaBolsaUnsaved.contrapartida"]').check(); //Clica no campo de Contrapartida para marcar a opção "Sim"
+        // cy.get('[data-cy="rubricaBolsaUnsaved.entidade"]').click().type("Entidade de Teste", {delay: 0}); //Clica no campo de Entidade e preenche com o texto "Entidade de Teste"
+        // cy.get('[data-cy="rubricaBolsaUnsaved.tipoPessoa"]').click();
+        // cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona a primeira opção de Tipo de Pessoa da lista de Tipos de Pessoas
 
         cy.get('[data-cy="rubricaBolsaUnsaved.justificativa"]').click().type("Justificativa de Teste", {delay: 0}); //Clica no campo de Justificativa e preenche com o texto "Justificativa de Teste"
 
         cy.get('[data-cy="rubricaBolsa-confirmar"]').click();
         cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações da proposta
-        
-        cy.wait(1000); //Aguarda 500ms para garantir que a página
+      
+        cy.wait(1000); //Aguarda 500ms para garantir que a página carrega
+        cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
+        cy.wait(500); //Aguarda 500ms para garantir que a página foi carregada completamente
+
+        cy.get('[data-cy="next-button"]').click();
+        cy.get('[data-cy="next-button"]').click();
 
         // ANEXO - Documentos Pessoais
-        cy.get('[data-cy="anexos"]').click();
-        cy.get('[data-cy="documentos-pessoais"]').click();
+        //cy.get('[data-cy="anexos"]').click();
+        //cy.get('[data-cy="documentos-pessoais"]').click();
 
         cy.get('#select-categories').click(); //Clica no campo de seleção de Categorias
         cy.get('[data-cy="documentoPessoalPropostaAnexo-item-rg"]').click(); //Clica no campo de seleção de Documento Pessoal (RG)        
         
         cy.get('[data-cy="documentoPessoalPropostaAnexo-procure"]').click(); //Clica no botão "Procurar" para selecionar um arquivo
-        cy.get('[data-cy="documentoPessoalPropostaAnexo-procure"]').selectFile('/cypress/fixtures/rgtest.pdf'); 
+        cy.get('[data-cy="documentoPessoalPropostaAnexo-procure"]').selectFile('cypress/fixtures/rgtest.pdf'); 
 
         cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
         cy.wait(500);
@@ -346,7 +466,13 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
         cy.get('.MuiPaper-root > .MuiList-root > [tabindex="0"]').click();
 
         cy.get('[data-cy="documentoPropostaAnexo-procure"]').click(); //Clica no botão "Procurar" para selecionar um arquivo
-        cy.get('[data-cy="documentoPropostaAnexo-procure"]').selectFile('/cypress/fixtures/documentoteste.pdf'); //Seleciona o arquivo "robbie.pdf" do diretório "cypress/fixtures"
+        cy.get('[data-cy="documentoPropostaAnexo-procure"]').selectFile('cypress/fixtures/documentoteste.csv'); //Seleciona o arquivo "robbie.pdf" do diretório "cypress/fixtures"
+
+        cy.get('#select-categories').click(); //Clica no campo de seleção de Categorias
+        cy.get('.MuiList-root > [tabindex="-1"]').click();
+
+        cy.get('[data-cy="documentoPropostaAnexo-procure"]').click(); //Clica no botão "Procurar" para selecionar um arquivo
+        cy.get('[data-cy="documentoPropostaAnexo-procure"]').selectFile('cypress/fixtures/documentoteste.csv'); //Seleciona o arquivo "robbie.pdf" do diretório "cypress/fixtures"
         
         cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
         cy.wait(500);
@@ -358,12 +484,11 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       cy.get('[data-cy="termo-de-aceite"] > .MuiListItemText-root > .MuiTypography-root').click(); //Clica na aba Termo de Aceite para acessar a seção de Termo de Aceite
       cy.wait(1000);
       cy.get('[data-cy="termoDeAceiteAceito"]').check(); //Clica no campo de seleção de Termo de Aceite Aceito
-      cy.get('[data-cy="termoDeAceiteAceito"]').check(); //Clica no campo de seleção de Termo de Aceite Aceito
       
+      cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações da proposta
       //Verificação de Pendências
       cy.get('[data-cy="menu-verificar-penden"]').click(); //Clica no botão "Verificar Pendências" para verificar se há pendências na proposta
   
-      cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações da proposta
       cy.get('[data-cy="menu-finalizar"]').click(); //Clica no botão "Finalizar" para salvar e sair da área de adição da propostas
     
     }); 
