@@ -21,14 +21,11 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     )
     // Atividade 3 - Faça a continuidade do teste, preenchendo os campos obrigatórios da proposta.
 
-    /*
-    cy.get('[data-cy="instituicaoExecutoraId"]').click();
-    cy.get('[data-cy-index="instituicaoExecutoraId-item-1"]').click(); //Seleciona a primeira Instituição Executora da lista de Instituições
-
+    // cy.get('[data-cy="instituicaoExecutoraId"]').click();
+    // cy.get('[data-cy-index="instituicaoExecutoraId-item-1"]').click(); //Seleciona a primeira Instituição Executora da lista de Instituições
 
     cy.get('[data-cy="unidadeExecutoraId"]').click();
     cy.get('[data-cy-index="unidadeExecutoraId-item-0"]').click(); //Seleciona a primeira Unidade Executora da lista de Unidades
-    */
 
     // cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
 
@@ -42,10 +39,6 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
 
     cy.get('[data-cy="areaDeConhecimento.0.subAreaId"]').click();
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); // Seleciona a primeira opção
-
-    /*cy.get('[data-cy="areaDeConhecimento.0.subAreaId"]').click();
-    cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); // Seleciona a primeira opção*/
-
 
     cy.get('[data-cy="areaDeConhecimento.0.especialidadeId"]').click()
     cy.wait(300);
@@ -176,10 +169,9 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.wait(500);
 
     // INDICADORES DE PRODUÇÃO DO EDITAL MÉDIO ENTRA AQUI
-    Cypress._.times(20, (index) => {
+    Cypress._.times(35, (index) => {
       cy.get('input[type="number"]').eq(index).type('10', { delay: 0 }); //Preenche os campos de Indicadores de Produção com o valor "10"
     });
-
 
     // cy.get('[data-cy="nome-do-pesquisa"]').click(); //Clica na aba Nome do Pesquisador para acessar a seção de Nome do Pesquisador
     // cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona o primeiro Mês de Início da lista de Meses

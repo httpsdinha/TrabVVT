@@ -17,7 +17,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('[data-cy="nav-item-publicar-edital"]').click(); //Clica na opção Editais para acessar da página de Editais
     cy.get('[data-cy="add-publicar-edital"]').click(); //Clica no botão "Adicionar" para criação de um novo Edital
 
-    cy.get('[data-cy="nome"]').type("Grupo-03 E.C. 007/2025 Alexandre-Torres", {
+    cy.get('[data-cy="nome"]').type("Grupo-03 E.C. 008/2025 Alexandre-Torres", {
       delay: 0,
     }); //Preenche o campo "Nome" do Edital
     cy.get('[data-cy="restricoes"]').click();
@@ -203,7 +203,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
       cy.get('[data-cy="documentoPessoalEdital-adicionar"]').click();
       cy.get(`[data-cy="documentoPessoalEdital.${index}.documentoPessoalId"]`).click();
       cy.get('.MuiAutocomplete-popper [role="option"]:not(:empty)').first().click();
-      cy.get(`[data-cy="documentoPessoalEdital.${index}.obrigatorio"]`).check();
+      // cy.get(`[data-cy="documentoPessoalEdital.${index}.obrigatorio"]`).check();
       cy.get('.MuiAutocomplete-popper').should('not.exist');
     });
 

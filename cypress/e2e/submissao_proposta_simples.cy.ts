@@ -12,7 +12,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       cy.get('[data-cy="breadcrumb-home"]').click(); //Clica no botão "Home" para retornar à página anterior
       cy.get('[data-cy="editais-ver-mais"]').click(); //Clica no botão "Ver Mais" para acessar a página de Editais
   
-      cy.get('[data-cy="visualizar-edital-grupo-03-e-s-006"]').click(); //Edite essa linha para selecionar o Edital respectivo
+      cy.get('[data-cy="visualizar-edital-grupo-03-e-s-007"]').click(); //Edite essa linha para selecionar o Edital respectivo
       cy.wait(300); //Aguarda 300ms para garantir que a página foi carregada completamente
       cy.get('[data-cy="criar-proposta"]').click(); //Clica no botão "Criar Proposta" para iniciar o processo de criação de uma nova proposta
       cy.get('[data-cy="tituloDoProjeto"]').clear().type(
@@ -28,7 +28,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       cy.get('[data-cy="unidadeExecutoraId"]').click();
       cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click(); // Seleciona a segunda opção
   
-      // cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
+      cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
   
       cy.get('.MuiAccordionSummary-root').click();
   
@@ -129,7 +129,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       cy.get('[data-cy="criadoPor.linkedin"]').click(); //Clica no campo de LinkedIn
       cy.get('[data-cy="criadoPor.linkedin"]').clear().type('https://www.linkedin.com/in/teste-linkedin', { delay: 0 }); //Preenche o campo de LinkedIn com um link fictício
   
-      // cy.get('[data-cy="criadoPor.areaDeConhecimento-adicionar"]').click(); //Clica no botão "Adicionar" para adicionar uma nova Área de Conhecimento
+      cy.get('[data-cy="criadoPor.areaDeConhecimento-adicionar"]').click(); //Clica no botão "Adicionar" para adicionar uma nova Área de Conhecimento
   
       cy.get('.MuiAccordionSummary-root').click(); //Clica no cabeçalho do acordeão para expandir as opções de Área de Conhecimento
       cy.get('[data-cy="criadoPor.areaDeConhecimento.0.grandeAreaId"]').click(); //Clica no campo de seleção de Grande Área
