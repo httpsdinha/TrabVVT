@@ -100,12 +100,15 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
         .then(($opcao) => {
           const textoDaOpcao = $opcao.text();
           cy.wrap($opcao).click();
-          cy.get('[data-cy="perguntaInfoId"]').should('have.value', textoDaOpcao);
+          cy.get('[data-cy="perguntaInfoId"]').should(
+            "have.value",
+            textoDaOpcao
+          );
         });
 
       cy.wait(2000); // Espera 2 segundos antes de clicar
       cy.get('[data-cy="informacaoComplementarPergunta-adicionar"]').click();
-      cy.get('.MuiAutocomplete-popper').should('not.exist');
+      cy.get(".MuiAutocomplete-popper").should("not.exist");
     });
 
     cy.get('[data-cy="menu-salvar"]').click();
@@ -118,17 +121,18 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     ); //Preenche o campo "Término" do Período de Submissão com a data do dia de hoje + 1 ano
     cy.get('[data-cy="chamada-confirmar"]').click(); //Clica no botão "Salvar" para salvar as informações do Período de Submissão
 
-    
     cy.get('[data-cy="orcamento"]').click(); //Clica na aba Orçamento para exibir as opções de Orçamento
     cy.get('[data-cy="programa"]').click(); //Clica em Programa para seguir para a página de Programa
     cy.get('[data-cy="programaId"]').click(); //Clica no campo de seleção de Programa
     cy.get('[data-cy-index="programaId-item-0"]').click(); //Seleciona o primeiro Programa da lista de Programas
     cy.get('[data-cy="add-natureza-da-despesa"]').click();
-    cy.get('[data-cy="naturezaDespesaEditalUnsaved.naturezaDespesaId"]').click();
-    cy.get('[data-cy-index="naturezaDespesaEditalUnsaved.naturezaDespesaId-item-0"]').click();
-    cy.get('[data-cy="naturezaDespesaEditalUnsaved.valor"]').type(
-      '550,00'
-    );
+    cy.get(
+      '[data-cy="naturezaDespesaEditalUnsaved.naturezaDespesaId"]'
+    ).click();
+    cy.get(
+      '[data-cy-index="naturezaDespesaEditalUnsaved.naturezaDespesaId-item-0"]'
+    ).click();
+    cy.get('[data-cy="naturezaDespesaEditalUnsaved.valor"]').type("550,00");
     /*cy.get('[data-cy="naturezaDespesaEditalUnsaved.edicaoProgramaId"]').click();
     cy.get('[data-cy-index="naturezaDespesaEditalUnsaved.edicaoProgramaId-item-0"]').click();*/
     cy.get('[data-cy="naturezaDespesaEdital-confirmar"]').click();
@@ -150,7 +154,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('[data-cy="faixas-de-financiamento"]').click();
     let valorMaximoAnterior = 1000;
     const tamanhoDaFaixa = 4000;
-    
+
     Cypress._.times(5, (index) => {
       cy.get('[data-cy="add-button"]').click();
       const valorMinimo = valorMaximoAnterior + 0.1;
@@ -160,13 +164,15 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
         .type(`Faixa ${index + 1}`, { delay: 0 });
       cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMinimo"]')
         .clear()
-        .type(valorMinimo.toFixed(2).replace('.', ','));
+        .type(valorMinimo.toFixed(2).replace(".", ","));
       cy.get('[data-cy="faixaFinanciamentoUnsaved.valorMaximo"]')
         .clear()
-        .type(valorMaximo.toFixed(2).replace('.', ','));
+        .type(valorMaximo.toFixed(2).replace(".", ","));
       cy.get('[data-cy="faixaFinanciamentoUnsaved.observacao"]')
         .clear()
-        .type(`Observação sobre a Faixa de Financiamento ${index + 1}.`, { delay: 0 });
+        .type(`Observação sobre a Faixa de Financiamento ${index + 1}.`, {
+          delay: 0,
+        });
       cy.get('[data-cy="faixaFinanciamento-confirmar"]').click();
       valorMaximoAnterior = valorMaximo;
     });
@@ -179,21 +185,25 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
       cy.get('[data-cy="documentoPropostaEdital-adicionar"]').click(); //Clica no botão "Adicionar" para criar um novo Documento da Proposta
       cy.get('[data-cy="documentoPropostaEdital--expandable-item"]').click();
       cy.get(`[data-cy="documentoPropostaEdital.${index}.nome"]`)
-      .clear()
-      .type(`Documento de Exemplo ${index + 1}`, { delay: 0 });
+        .clear()
+        .type(`Documento de Exemplo ${index + 1}`, { delay: 0 });
 
       cy.get(`[data-cy="documentoPropostaEdital.${index}.descricao"]`)
         .clear()
         .type(`Descrição do Documento de Exemplo ${index + 1}`, { delay: 0 });
 
-      cy.get(`[data-cy="documentoPropostaEdital.${index}.formatoArquivo"]`).click();
+      cy.get(
+        `[data-cy="documentoPropostaEdital.${index}.formatoArquivo"]`
+      ).click();
       cy.get('.MuiAutocomplete-popper [role="option"]').first().click();
 
       cy.get(`[data-cy="documentoPropostaEdital.${index}.tamanhoArquivo"]`)
         .clear()
-        .type('10', { delay: 0 });
+        .type("10", { delay: 0 });
 
-      cy.get(`[data-cy="documentoPropostaEdital.${index}.arquivoSubmissaoObrigatoria"]`).check();
+      cy.get(
+        `[data-cy="documentoPropostaEdital.${index}.arquivoSubmissaoObrigatoria"]`
+      ).check();
     });
 
     cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações do Edital
@@ -201,10 +211,14 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
 
     Cypress._.times(5, (index) => {
       cy.get('[data-cy="documentoPessoalEdital-adicionar"]').click();
-      cy.get(`[data-cy="documentoPessoalEdital.${index}.documentoPessoalId"]`).click();
-      cy.get('.MuiAutocomplete-popper [role="option"]:not(:empty)').first().click();
+      cy.get(
+        `[data-cy="documentoPessoalEdital.${index}.documentoPessoalId"]`
+      ).click();
+      cy.get('.MuiAutocomplete-popper [role="option"]:not(:empty)')
+        .first()
+        .click();
       // cy.get(`[data-cy="documentoPessoalEdital.${index}.obrigatorio"]`).check();
-      cy.get('.MuiAutocomplete-popper').should('not.exist');
+      cy.get(".MuiAutocomplete-popper").should("not.exist");
     });
 
     cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações do Edital
@@ -217,9 +231,9 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
       cy.get('.MuiAutocomplete-popper [role="option"]')
         .eq(index + 2)
         .then(($opcao) => {
-            const textoDaOpcao = $opcao.text();
-            cy.wrap($opcao).click();
-            cy.wait(2000);
+          const textoDaOpcao = $opcao.text();
+          cy.wrap($opcao).click();
+          cy.wait(2000);
         });
 
       cy.get('[data-cy="pergunta-adicionar"]').click(); //Clica no botão "Adicionar"
@@ -258,7 +272,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
 
     cy.get('[data-cy="bolsas-do-edital"]').click();
     cy.get('[data-cy="bolsas"]').click();
-    
+
     Cypress._.times(5, (index) => {
       cy.get('[data-cy="add-button"]').click(); //Clica no botão "Adicionar" para criar uma nova Bolsa
       cy.get('[data-cy="bolsaEditalUnsaved.modalidadeBolsaId"]').click(); //Clica no campo de seleção de modalidade da Bolsa
@@ -271,7 +285,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     });
 
     cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações do Edital
-    
+
     cy.get('[data-cy="menu-finalizar"]').click(); //Clica no botão "Finalizar" para salvar e sair da área de adição do Edital
   });
 });

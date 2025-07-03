@@ -1,14 +1,14 @@
-describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', () => {
+describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", () => {
   beforeEach(() => {
     // Gancho em nível raíz
     // executa antes de realizar cada teste(it)
     cy.typelogin(
-      'https://novo-sig.ledes.net/',// [URL do sistema]
-      'grupo14_pesq@sig.com',
-      'Grupo14@sig', // [Senha do usuário]
+      "https://novo-sig.ledes.net/", // [URL do sistema]
+      "grupo14_pesq@sig.com",
+      "Grupo14@sig" // [Senha do usuário]
     ); //Acessa a página de login usando as credenciais do usuário e senha.
   });
-  it('Realiza login no sistema e submete uma proposta', () => {
+  it("Realiza login no sistema e submete uma proposta", () => {
     cy.get('[data-cy="breadcrumb-home"]').click(); //Clica no botão "Home" para retornar à página anterior
     cy.get('[data-cy="editais-ver-mais"]').click(); //Clica no botão "Ver Mais" para acessar a página de Editais
 
@@ -16,9 +16,9 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.wait(300); //Aguarda 300ms para garantir que a página foi carregada completamente
     cy.get('[data-cy="criar-proposta"]').click(); //Clica no botão "Criar Proposta" para iniciar o processo de criação de uma nova proposta
     cy.get('[data-cy="tituloDoProjeto"]').clear().type(
-        'Submissão de Proposta Cypress', //Preenche o campo "Título do Projeto" com o valor "Submissão de Proposta de Teste"
-        { delay: 0 },
-    )
+      "Submissão de Proposta Cypress", //Preenche o campo "Título do Projeto" com o valor "Submissão de Proposta de Teste"
+      { delay: 0 }
+    );
     // Atividade 3 - Faça a continuidade do teste, preenchendo os campos obrigatórios da proposta.
 
     // cy.get('[data-cy="instituicaoExecutoraId"]').click();
@@ -28,12 +28,12 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.wait(300); //Aguarda 300ms para garantir que o campo de Unidade Executora esteja pronto para receber o valor
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click(); // Seleciona a primeira opção
 
-      cy.get('body').then(($body) => {
-        if ($body.find('.MuiAccordionSummary-root').length === 0) {
-          cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
-        }
-        cy.get('.MuiAccordionSummary-root').click();
-      });
+    cy.get("body").then(($body) => {
+      if ($body.find(".MuiAccordionSummary-root").length === 0) {
+        cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
+      }
+      cy.get(".MuiAccordionSummary-root").click();
+    });
 
     cy.get('[data-cy="areaDeConhecimento.0.grandeAreaId"]').click();
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); // Seleciona a primeira opção
@@ -44,7 +44,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="areaDeConhecimento.0.subAreaId"]').click();
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); // Seleciona a primeira opção
 
-    cy.get('[data-cy="areaDeConhecimento.0.especialidadeId"]').click()
+    cy.get('[data-cy="areaDeConhecimento.0.especialidadeId"]').click();
     cy.wait(300);
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); // Seleciona a primeira opção
 
@@ -56,7 +56,7 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
 
     cy.get('[data-cy="abrangencia.0.estadoId"]').click(); //Clica no campo de seleção de Estado
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona o primeiro Estado da lista de Estados
-    
+
     cy.get('[data-cy="abrangencia.0.abrangenciaMunicipio"]').click(); //Clica no campo de seleção de Abrangência Municipal
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(3).click(); //Seleciona o primeiro Município da lista de Municípios
 
@@ -71,12 +71,16 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona o primeiro País da lista de Países
 
     cy.get('[data-cy="criadoPor.documento"]').click(); //Clica no campo de Documento
-    cy.get('[data-cy="criadoPor.documento"]').clear().type('05242842105', {delay: 0}); //Preenche o campo de Documento com o valor "123456789"
+    cy.get('[data-cy="criadoPor.documento"]')
+      .clear()
+      .type("05242842105", { delay: 0 }); //Preenche o campo de Documento com o valor "123456789"
 
     cy.get('[data-cy="criadoPor.nomeSocial"]').click(); //Clica no campo de Nome Social
     cy.wait(300); //Aguarda 300ms para garantir que o campo de Nome Social esteja pronto para receber o valor
-    cy.get('[data-cy="criadoPor.nomeSocial"]').clear().type('Teste Nome Social', {delay: 0}); // Limpa e preenche o campo de Nome Social
-    
+    cy.get('[data-cy="criadoPor.nomeSocial"]')
+      .clear()
+      .type("Teste Nome Social", { delay: 0 }); // Limpa e preenche o campo de Nome Social
+
     cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar"
     /*
     cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
@@ -124,24 +128,30 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(3).click(); //Seleciona o primeiro Nível Acadêmico da lista de Níveis Acadêmicos
 
     cy.get('[data-cy="criadoPor.lattes"]').click(); //Clica no campo de Lattes
-    cy.get('[data-cy="criadoPor.lattes"]').clear().type('http://lattes.cnpq.br/1234567890123456', { delay: 0 }); //Preenche o campo de Lattes com um link fictício
+    cy.get('[data-cy="criadoPor.lattes"]')
+      .clear()
+      .type("http://lattes.cnpq.br/1234567890123456", { delay: 0 }); //Preenche o campo de Lattes com um link fictício
 
     cy.get('[data-cy="criadoPor.linkedin"]').click(); //Clica no campo de LinkedIn
-    cy.get('[data-cy="criadoPor.linkedin"]').clear().type('https://www.linkedin.com/in/teste-linkedin', { delay: 0 }); //Preenche o campo de LinkedIn com um link fictício
+    cy.get('[data-cy="criadoPor.linkedin"]')
+      .clear()
+      .type("https://www.linkedin.com/in/teste-linkedin", { delay: 0 }); //Preenche o campo de LinkedIn com um link fictício
 
-    cy.get('body').then(($body) => {
-        if ($body.find('.MuiAccordionSummary-root').length === 0) {
-          cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
-        }
-        cy.get('.MuiAccordionSummary-root').click();
-      });
+    cy.get("body").then(($body) => {
+      if ($body.find(".MuiAccordionSummary-root").length === 0) {
+        cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
+      }
+      cy.get(".MuiAccordionSummary-root").click();
+    });
     cy.get('[data-cy="criadoPor.areaDeConhecimento.0.areaId"]').click(); //Clica no campo de seleção de Área
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona a primeira Área da lista de Áreas
 
     cy.get('[data-cy="criadoPor.areaDeConhecimento.0.subAreaId"]').click(); //Clica no campo de seleção de Subárea
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona a primeira Subárea da lista de Subáreas
 
-    cy.get('[data-cy="criadoPor.areaDeConhecimento.0.especialidadeId"]').click(); //Clica no campo de seleção de Especialidade
+    cy.get(
+      '[data-cy="criadoPor.areaDeConhecimento.0.especialidadeId"]'
+    ).click(); //Clica no campo de seleção de Especialidade
     cy.wait(300); //Aguarda 300ms para garantir que o campo de Especialidade esteja pronto para receber o valor
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona a primeira Especialidade da lista de Especialidades
 
@@ -153,20 +163,32 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
 
     cy.get('[data-cy="criadoPor.possuiVinculoInstitucional"]').check(); //Clica no campo de seleção de Possui Vínculo Institucional
 
-    cy.get('[data-cy="criadoPor.vinculoInstitucional.tipoVinculoInstitucionalId"]').click(); //Clica no campo de seleção de Tipo de Vínculo Institucional
+    cy.get(
+      '[data-cy="criadoPor.vinculoInstitucional.tipoVinculoInstitucionalId"]'
+    ).click(); //Clica no campo de seleção de Tipo de Vínculo Institucional
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona o primeiro Tipo de Vínculo Institucional da lista de Tipos
 
     cy.get('[data-cy="criadoPor.possuiVinculoEmpregaticio"]').check(); //Clica no campo de seleção de Possui Vínculo Empregatício
 
-    cy.get('[data-cy="criadoPor.vinculoInstitucional.inicioServico"]').type('01102023', {delay: 0}); //Preenche o campo de Início de Serviço com a data "2023-10-01"
+    cy.get('[data-cy="criadoPor.vinculoInstitucional.inicioServico"]').type(
+      "01102023",
+      { delay: 0 }
+    ); //Preenche o campo de Início de Serviço com a data "2023-10-01"
 
-    cy.get('[data-cy="criadoPor.vinculoInstitucional.regimeTrabalhoId"]').click(); //Clica no campo de seleção de Regime de Trabalho
+    cy.get(
+      '[data-cy="criadoPor.vinculoInstitucional.regimeTrabalhoId"]'
+    ).click(); //Clica no campo de seleção de Regime de Trabalho
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona o primeiro Regime de Trabalho da lista de Regimes
 
     cy.get('[data-cy="criadoPor.vinculoInstitucional.funcao"]').click(); //Clica no campo de Função
-    cy.get('[data-cy="criadoPor.vinculoInstitucional.funcao"]').clear().type('Pesquisador', {delay: 0}) ; //Preenche o campo de Função com o valor "Pesquisador"
+    cy.get('[data-cy="criadoPor.vinculoInstitucional.funcao"]')
+      .clear()
+      .type("Pesquisador", { delay: 0 }); //Preenche o campo de Função com o valor "Pesquisador"
 
-    cy.get('[data-cy="criadoPor.vinculoInstitucional.inicioFuncao"]').type('01102023', {delay: 0}); //Preenche o campo de Início de Função com a data "2023-10-01"
+    cy.get('[data-cy="criadoPor.vinculoInstitucional.inicioFuncao"]').type(
+      "01102023",
+      { delay: 0 }
+    ); //Preenche o campo de Início de Função com a data "2023-10-01"
 
     cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações dos Dados Profissionais
     cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
@@ -174,15 +196,14 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
 
     // INDICADORES DE PRODUÇÃO DO EDITAL MÉDIO ENTRA AQUI
     Cypress._.times(41, (index) => {
-      cy.get('input[type="number"]').eq(index).type('10', { delay: 0 }); //Preenche os campos de Indicadores de Produção com o valor "10"
+      cy.get('input[type="number"]').eq(index).type("10", { delay: 0 }); //Preenche os campos de Indicadores de Produção com o valor "10"
     });
 
     // cy.get('[data-cy="nome-do-pesquisa"]').click(); //Clica na aba Nome do Pesquisador para acessar a seção de Nome do Pesquisador
     // cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona o primeiro Mês de Início da lista de Meses
     // cy.get('.MuiButton-root > .MuiStack-root').click(); //Clica no botão "Adicionar" para adicionar um novo Nome do Pesquisador
-    // cy.get('.custom-input-container > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click(); //Clica no campo de seleção de Nome do Pesquisador    
+    // cy.get('.custom-input-container > .MuiAutocomplete-root > .MuiFormControl-root > .MuiInputBase-root').click(); //Clica no campo de seleção de Nome do Pesquisador
     // cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona o primeiro Funcao do Membro da lista de Funções
-
 
     cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
     cy.wait(500);
@@ -212,13 +233,12 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="termoDeAceiteAceito"]').check(); //Clica no campo de seleção de Termo de Aceite Aceito
     cy.get('[data-cy="menu-verificar-penden"]').click(); //Clica no botão "Verificar Pendências" para verificar se há pendências na proposta
 
-    
     cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações da proposta
 
     cy.get('[data-cy="menu-verificar-penden"]').click(); //Clica no botão "Verificar Pendências" para verificar se há pendências na proposta
     cy.wait(500); //Aguarda 500ms para garantir que a verificação
 
     // cy.get('[data-cy="menu-finalizar"]').click(); //Clica no botão "Finalizar" para salvar e sair da área de adição da propostas
-    cy.contains('button', 'Submeter Proposta').click();
-  }); 
+    cy.contains("button", "Submeter Proposta").click();
+  });
 });
