@@ -25,11 +25,15 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     // cy.get('[data-cy-index="instituicaoExecutoraId-item-1"]').click(); //Seleciona a primeira Instituição Executora da lista de Instituições
 
     cy.get('[data-cy="unidadeExecutoraId"]').click();
-    cy.get('[data-cy-index="unidadeExecutoraId-item-0"]').click(); //Seleciona a primeira Unidade Executora da lista de Unidades
+    cy.wait(300); //Aguarda 300ms para garantir que o campo de Unidade Executora esteja pronto para receber o valor
+    cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click(); // Seleciona a primeira opção
 
-    // cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
-
-    cy.get('.MuiAccordionSummary-root').click();
+      cy.get('body').then(($body) => {
+        if ($body.find('.MuiAccordionSummary-root').length === 0) {
+          cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
+        }
+        cy.get('.MuiAccordionSummary-root').click();
+      });
 
     cy.get('[data-cy="areaDeConhecimento.0.grandeAreaId"]').click();
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); // Seleciona a primeira opção
@@ -125,12 +129,12 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
     cy.get('[data-cy="criadoPor.linkedin"]').click(); //Clica no campo de LinkedIn
     cy.get('[data-cy="criadoPor.linkedin"]').clear().type('https://www.linkedin.com/in/teste-linkedin', { delay: 0 }); //Preenche o campo de LinkedIn com um link fictício
 
-    // cy.get('[data-cy="criadoPor.areaDeConhecimento-adicionar"]').click(); //Clica no botão "Adicionar" para adicionar uma nova Área de Conhecimento
-
-    cy.get('.MuiAccordionSummary-root').click(); //Clica no cabeçalho do acordeão para expandir as opções de Área de Conhecimento
-    cy.get('[data-cy="criadoPor.areaDeConhecimento.0.grandeAreaId"]').click(); //Clica no campo de seleção de Grande Área
-    cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona a primeira Grande Área da lista de Grandes Áreas
-
+    cy.get('body').then(($body) => {
+        if ($body.find('.MuiAccordionSummary-root').length === 0) {
+          cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
+        }
+        cy.get('.MuiAccordionSummary-root').click();
+      });
     cy.get('[data-cy="criadoPor.areaDeConhecimento.0.areaId"]').click(); //Clica no campo de seleção de Área
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona a primeira Área da lista de Áreas
 
@@ -154,22 +158,22 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
 
     cy.get('[data-cy="criadoPor.possuiVinculoEmpregaticio"]').check(); //Clica no campo de seleção de Possui Vínculo Empregatício
 
-    cy.get('[data-cy="criadoPor.vinculoInstitucional.inicioServico"]').type('01102023'); //Preenche o campo de Início de Serviço com a data "2023-10-01"
+    cy.get('[data-cy="criadoPor.vinculoInstitucional.inicioServico"]').type('01102023', {delay: 0}); //Preenche o campo de Início de Serviço com a data "2023-10-01"
 
     cy.get('[data-cy="criadoPor.vinculoInstitucional.regimeTrabalhoId"]').click(); //Clica no campo de seleção de Regime de Trabalho
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona o primeiro Regime de Trabalho da lista de Regimes
 
     cy.get('[data-cy="criadoPor.vinculoInstitucional.funcao"]').click(); //Clica no campo de Função
-    cy.get('[data-cy="criadoPor.vinculoInstitucional.funcao"]').clear().type('Pesquisador'); //Preenche o campo de Função com o valor "Pesquisador"
+    cy.get('[data-cy="criadoPor.vinculoInstitucional.funcao"]').clear().type('Pesquisador', {delay: 0}) ; //Preenche o campo de Função com o valor "Pesquisador"
 
-    cy.get('[data-cy="criadoPor.vinculoInstitucional.inicioFuncao"]').type('01102023'); //Preenche o campo de Início de Função com a data "2023-10-01"
+    cy.get('[data-cy="criadoPor.vinculoInstitucional.inicioFuncao"]').type('01102023', {delay: 0}); //Preenche o campo de Início de Função com a data "2023-10-01"
 
     cy.get('[data-cy="menu-salvar"]').click(); //Clica no botão "Salvar" para salvar as informações dos Dados Profissionais
     cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
     cy.wait(500);
 
     // INDICADORES DE PRODUÇÃO DO EDITAL MÉDIO ENTRA AQUI
-    Cypress._.times(35, (index) => {
+    Cypress._.times(41, (index) => {
       cy.get('input[type="number"]').eq(index).type('10', { delay: 0 }); //Preenche os campos de Indicadores de Produção com o valor "10"
     });
 

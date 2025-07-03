@@ -26,11 +26,14 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
   
   
       cy.get('[data-cy="unidadeExecutoraId"]').click();
-      cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click(); // Seleciona a segunda opção
-  
-      cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
-  
-      cy.get('.MuiAccordionSummary-root').click();
+      cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click(); // Seleciona a primeira opção
+    
+      cy.get('body').then(($body) => {
+        if ($body.find('.MuiAccordionSummary-root').length === 0) {
+          cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
+        }
+        cy.get('.MuiAccordionSummary-root').click();
+      });
   
       cy.get('[data-cy="areaDeConhecimento.0.grandeAreaId"]').click();
       cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); // Seleciona a primeira opção
@@ -129,9 +132,12 @@ describe('Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas', 
       cy.get('[data-cy="criadoPor.linkedin"]').click(); //Clica no campo de LinkedIn
       cy.get('[data-cy="criadoPor.linkedin"]').clear().type('https://www.linkedin.com/in/teste-linkedin', { delay: 0 }); //Preenche o campo de LinkedIn com um link fictício
   
-      cy.get('[data-cy="criadoPor.areaDeConhecimento-adicionar"]').click(); //Clica no botão "Adicionar" para adicionar uma nova Área de Conhecimento
-  
-      cy.get('.MuiAccordionSummary-root').click(); //Clica no cabeçalho do acordeão para expandir as opções de Área de Conhecimento
+      cy.get('body').then(($body) => {
+        if ($body.find('.MuiAccordionSummary-root').length === 0) {
+          cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
+        }
+        cy.get('.MuiAccordionSummary-root').click();
+      });
       cy.get('[data-cy="criadoPor.areaDeConhecimento.0.grandeAreaId"]').click(); //Clica no campo de seleção de Grande Área
       cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona a primeira Grande Área da lista de Grandes Áreas
   
