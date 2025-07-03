@@ -25,13 +25,8 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('[data-cy="instituicaoExecutoraId"]').click();
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click(); // Seleciona a primeira opção
 
-    // cy.get('[data-cy="unidadeExecutoraId"]').click();
-    // cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click(); // Seleciona a primeira opção
-
-    // descomentar caso seja a primeira vez fazendo uma submissão de proposta
-    // cy.get('[data-cy="areaDeConhecimento-adicionar"]').should('exist').then(() => {
-    // cy.get('[data-cy="areaDeConhecimento-adicionar"]').click();
-    // });
+    cy.get('[data-cy="unidadeExecutoraId"]').click();
+    cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click(); // Seleciona a primeira opção
 
     cy.get("body").then(($body) => {
       if ($body.find(".MuiAccordionSummary-root").length === 0) {
@@ -120,7 +115,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
       .clear()
       .type("Teste Nome Social", { delay: 0 }); // Limpa e preenche o campo de Nome Social
 
-    /*
+    /* Essa parte esta comentada pois o sistema nao salva adequadamente os dados de Endereco 
       cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
       cy.wait(500);
   
@@ -160,7 +155,7 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
 
     cy.get('[data-cy="criadoPor.instituicaoId"]').click(); //Clica no campo de seleção de Instituição
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(1).click(); //Seleciona a primeira Instituição da lista de Instituições
-
+    cy.wait(300); //Aguarda 300ms para garantir que o campo de Instituição esteja pronto para receber o valor
     //NAO POSSUI OPCOES
     cy.get('[data-cy="criadoPor.unidadeId"]').click(); //Clica no campo de seleção de Unidade
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona a primeira Instituição da lista de Instituições
@@ -260,14 +255,12 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
 
     cy.wait(500); //Aguarda 500ms para garantir que a página foi carregada completamente
 
-    // INDICADORES DE PRODUÇÃO DO EDITAL MÉDIO ENTRA AQUI
-    // Mudar aqui para 35 vezes
-    Cypress._.times(2, (index) => {
+    // INDICADORES DE PRODUÇÃO DO EDITAL COMPLETO ENTRA AQUI
+    Cypress._.times(41, (index) => {
       cy.get('input[type="number"]').eq(index).type("10", { delay: 0 }); //Preenche os campos de Indicadores de Produção com o valor "10"
     });
 
     // Isso cria um novo membro do projeto.
-
     // cy.get('[data-cy="nome-do-pesquisa"]').click(); //Clica na aba Nome do Pesquisador para acessar a seção de Nome do Pesquisador
     // cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona o primeiro Mês de Início da lista de Meses
     // cy.get('.MuiButton-root > .MuiStack-root').click(); //Clica no botão "Adicionar" para adicionar um novo Nome do Pesquisador
@@ -278,19 +271,6 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.wait(500);
     cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
 
-    /*
-      cy.get('[data-cy="propostaAtividade-adicionar"]').click(); //Clica no botão "Adicionar" para adicionar uma nova Atividade
-      cy.get('[data-cy="propostaAtividade.0.titulo"]').clear().type('A'); //Preenche o campo "Título" da Atividade com o valor "Atividade de Teste"
-      cy.get('[data-cy="propostaAtividade.0.mesInicio"]').click(); //Clica no campo de seleção de Mês de Início da Atividade
-      cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona o primeiro Mês de Início da lista de Meses
-      cy.get('[data-cy="propostaAtividade.0.duracao"]').click(); //Clica no campo de Duração da Atividade
-      cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona o primeiro valor de Duração da lista de Durações
-      cy.get('[data-cy="propostaAtividade.0.cargaHorariaSemanal"]').click(); //Clica no campo de Carga Horária Semanal da Atividade
-      cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona o primeiro valor de Carga Horária Semanal da lista de Cargas Horárias
-      cy.get('[data-cy="propostaAtividade.0.membroResponsavelId"]').click(); //Clica no campo de seleção de Membro Responsável da Atividade
-      cy.wait(1000);
-      cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click(); //Seleciona o primeiro Membro Responsável da lista de Membros
-      */
 
     cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
 
@@ -303,12 +283,6 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.wait(1000); //Aguarda 500ms para garantir que a página foi carregada completamente
 
     // Orcamento - Diarias
-
-    /*cy.get('[data-cy="apresentacao"] > .MuiListItemText-root > .MuiTypography-root').click(); //Clica na aba Apresentação para acessar a seção de Apresentação
-        cy.wait(1000); //Aguarda 500ms para garantir que a página foi carregada completamente
-
-        cy.get('[data-cy="orcamento"] > .MuiListItemText-root > .MuiTypography-root').click(); //Clica na aba Orçamento para acessar a seção de Orçamento
-        cy.wait(1000); //Aguarda 500ms para garantir que a página foi carregada completamente*/
 
     cy.get(
       '[data-cy="diarias"] > .MuiListItemText-root > .MuiTypography-root'
@@ -338,26 +312,8 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('[data-cy="rubricaDiariaUnsaved.mesPrevisto"]').click(); //Clica no campo de Mês Previsto
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(3).click();
 
-    // cy.get('[data-cy="rubricaDiariaUnsaved.contrapartida"]').click(); //Clica no campo de Contrapartida
-
-    // cy.get('[data-cy="rubricaDiariaUnsaved.tipoPessoa"]').click()
-    // cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
-
-    // cy.get('[data-cy="rubricaDiariaUnsaved.entidade"]').click().type("Entidade de Teste", {delay: 0}); //Clica no campo de Entidade e preenche com o texto "Entidade de Teste"
-
-    // cy.get('[data-cy="rubricaDiariaUnsaved.justificativa"]').click().type("Justificativa de Teste", {delay: 0}); //Clica no campo de Justificativa e preenche com o texto "Justificativa de Teste"
-
     cy.get('[data-cy="rubricaDiaria-confirmar"]').click(); //Clica no botão "Confirmar" para confirmar a adição da nova Rubrica de Diária
     cy.wait(1000); //Aguarda 500ms para garantir que a página foi carregada completamente
-
-    /*cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
-        cy.wait(500);
-
-        cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
-        cy.wait(500);
-
-        cy.get('[data-cy="next-button"]').click(); //Clica no botão "Próximo" para avançar para a próxima etapa do formulário de proposta
-        cy.wait(500);*/
 
     cy.get('[data-cy="next-button"]').click();
 
@@ -432,8 +388,6 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.wait(500); //Aguarda 500ms para garantir que a página foi carregada completamente
 
     cy.get('[data-cy="add-button"]').click();
-    //cy.get('[data-cy="rubricaHospedagemAlimentacaoUnsaved.paisId"]').click();
-    //cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
     cy.get('[data-cy="rubricaHospedagemAlimentacaoUnsaved.estadoId"]').click();
     cy.get('.MuiAutocomplete-popper [role="option"]').eq(0).click();
     cy.get('[data-cy="rubricaHospedagemAlimentacaoUnsaved.municipio"]').click();
@@ -551,8 +505,6 @@ describe("Sistema Integrado de Gestão para Fundações de Amparo a Pesquisas", 
     cy.get('[data-cy="next-button"]').click();
 
     // ANEXO - Documentos Pessoais
-    //cy.get('[data-cy="anexos"]').click();
-    //cy.get('[data-cy="documentos-pessoais"]').click();
 
     cy.get("#select-categories").click(); //Clica no campo de seleção de Categorias
     cy.get('[data-cy="documentoPessoalPropostaAnexo-item-rg"]').click(); //Clica no campo de seleção de Documento Pessoal (RG)
